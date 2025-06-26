@@ -257,9 +257,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
           </div>
 
           {/* Dashboard Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {/* My Courses */}
-            <div className="bg-white rounded-xl shadow-lg p-6 border">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+            {/* My Courses - Full width on large screens */}
+            <div className="bg-white rounded-xl shadow-lg p-6 border col-span-1 lg:col-span-4">
               <div className="flex items-center justify-between mb-4">
                 <div className="bg-orange-100 p-2 rounded-lg">
                   <BookOpen className="w-5 h-5 text-[#f68121]" />
@@ -267,8 +267,86 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
                 <span className="text-lg font-semibold text-gray-800">My Courses</span>
               </div>
               <div className="text-center py-8">
-                <p className="text-gray-500 mb-4">Courses Not Registered</p>
-                <div className="flex justify-between items-center text-sm">
+                {/* Course List Start */}
+                <div className="space-y-6">
+                  {/* Example Course Item */}
+                  {[
+                    {
+                      code: 'CSE205',
+                      name: 'DATA STRUCTURES AND ALGORITHMS',
+                      attendance: 100,
+                      classInfo: '',
+                    },
+                    {
+                      code: 'CSE343',
+                      name: 'TRAINING IN PROGRAMMING',
+                      attendance: 0,
+                      classInfo: '',
+                    },
+                    {
+                      code: 'INT345',
+                      name: 'COMPUTER VISION',
+                      attendance: 100,
+                      classInfo: 'Class Today at : 04-05 PM Room:MyClass',
+                    },
+                    {
+                      code: 'INT354',
+                      name: 'MACHINE LEARNING-I',
+                      attendance: 100,
+                      classInfo: 'Class Today at : 01-02 PM Room:MyClass,12-01 PM Room:MyClass',
+                    },
+                    {
+                      code: 'INT426',
+                      name: 'GENERATIVE ARTIFICIAL INTELLIGENCE',
+                      attendance: 100,
+                      classInfo: 'Class Today at : 03-04 PM Room:MyClass',
+                    },
+                    {
+                      code: 'MTH302',
+                      name: 'PROBABILITY AND STATISTICS',
+                      attendance: 100,
+                      classInfo: 'Class Today at : 09-10 AM Room:MyClass',
+                    },
+                    {
+                      code: 'PEL134',
+                      name: 'UPPER INTERMEDIATE COMMUNICATION SKILLS-II',
+                      attendance: 100,
+                      classInfo: 'Class Today at : 02-03 PM Room:MyClass',
+                    },
+                  ].map((course, idx) => (
+                    <div key={idx} className="flex items-center justify-between bg-gray-50 rounded-lg p-4 shadow-sm">
+                      {/* Attendance Circle */}
+                      <div className="flex-shrink-0 mr-4">
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center border-4 ${course.attendance === 100 ? 'border-green-500' : 'border-gray-300'}`}
+                          style={{ background: '#fff' }}>
+                          <span className={`text-xl font-bold ${course.attendance === 100 ? 'text-green-600' : 'text-gray-400'}`}>{course.attendance}%</span>
+                        </div>
+                      </div>
+                      {/* Course Info */}
+                      <div className="flex-1 text-left">
+                        <div className="font-semibold text-gray-800 text-base whitespace-nowrap overflow-x-auto" style={{maxWidth: '600px'}}>{course.code}:{course.name}</div>
+                        {course.classInfo && (
+                          <div className="text-xs text-gray-500 mt-1">{course.classInfo}</div>
+                        )}
+                      </div>
+                      {/* Buttons */}
+                      <div className="flex flex-col space-y-2 ml-4">
+                        <div className="flex flex-wrap gap-2">
+                          <button className="border border-[#f68121] text-[#f68121] rounded-full px-3 py-1 text-xs font-medium">IP</button>
+                          <button className="border border-[#f68121] text-[#f68121] rounded-full px-3 py-1 text-xs font-medium">Syllabus</button>
+                          <button className="border border-[#f68121] text-[#f68121] rounded-full px-3 py-1 text-xs font-medium">OER</button>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          <button className="border border-[#f68121] text-[#f68121] rounded-full px-3 py-1 text-xs font-medium">Timetable</button>
+                          <button className="border border-[#f68121] text-[#f68121] rounded-full px-3 py-1 text-xs font-medium">View Books</button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {/* Course List End */}
+                {/* CGPA and Attendance Summary */}
+                <div className="flex justify-between items-center text-sm mt-6">
                   <div>
                     <span className="text-gray-600">CGPA:</span>
                     <span className="font-bold text-blue-600 ml-1">4.00</span>
@@ -280,32 +358,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
                     <Info className="w-4 h-4 text-gray-400 inline ml-1" />
                   </div>
                 </div>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium mt-4 transition-colors">
-                  Transactions
-                </button>
               </div>
             </div>
-
-            {/* Fee */}
-            <div className="bg-white rounded-xl shadow-lg p-6 border">
-              <div className="flex items-center justify-between mb-4">
-                <div className="bg-orange-100 p-2 rounded-lg">
-                  <DollarSign className="w-5 h-5 text-[#f68121]" />
-                </div>
-                <span className="text-lg font-semibold text-gray-800">Fee</span>
-              </div>
-              <div className="text-center py-4">
-                <div className="text-3xl font-bold text-gray-800 mb-4">107000/-</div>
-                <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-lg text-sm font-medium mb-4 transition-colors">
-                  Pay Online
-                </button>
-                <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                  <Bell className="w-4 h-4" />
-                  <span>Fee Notification</span>
-                </div>
-              </div>
-            </div>
-
+          </div>
+          {/* Second row: Pending Assignments and Events */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
             {/* Pending Assignments */}
             <div className="bg-white rounded-xl shadow-lg p-6 border">
               <div className="flex items-center justify-between mb-4">
@@ -321,7 +378,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
                 </button>
               </div>
             </div>
-
             {/* Events */}
             <div className="bg-white rounded-xl shadow-lg p-6 border">
               <div className="flex items-center justify-between mb-4">
