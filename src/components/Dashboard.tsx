@@ -361,10 +361,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
               </div>
             </div>
           </div>
-          {/* Second row: Pending Assignments and Events */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
+          {/* Second row: Pending Assignments, Fee, and Events */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {/* Pending Assignments */}
-            <div className="bg-white rounded-xl shadow-lg p-6 border">
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border">
               <div className="flex items-center justify-between mb-4">
                 <div className="bg-orange-100 p-2 rounded-lg">
                   <ClipboardList className="w-5 h-5 text-[#f68121]" />
@@ -376,6 +376,25 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
                   View Assignments
                 </button>
+              </div>
+            </div>
+            {/* Fee */}
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border">
+              <div className="flex items-center justify-between mb-4">
+                <div className="bg-orange-100 p-2 rounded-lg">
+                  <DollarSign className="w-5 h-5 text-[#f68121]" />
+                </div>
+                <span className="text-lg font-semibold text-gray-800">Fee</span>
+              </div>
+              <div className="text-center py-4">
+                <div className="text-3xl font-bold text-gray-800 mb-4">107000/-</div>
+                <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-lg text-sm font-medium mb-4 transition-colors">
+                  Pay Online
+                </button>
+                <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                  <Bell className="w-4 h-4" />
+                  <span>Fee Notification</span>
+                </div>
               </div>
             </div>
             {/* Events */}
